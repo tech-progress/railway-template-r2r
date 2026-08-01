@@ -43,6 +43,12 @@ while IFS= read -r service_name; do
     description="$(jq -r --arg key "${key}" '.variables[$key].description // ""' <<<"${actual}")"
     expected_description="$(jq -r --arg service "${service_name}" --arg key "${key}" '.[$service][$key]' "${template_root}/template-descriptions.json")"
     [[ "${description}" == "${expected_description}" ]] || failures=$((failures + 1))
+    optional="$(jq -r --arg key "${key}" '.variables[$key].isOptional // false' <<<"${actual}")"
+    expected_optional=false
+    if [[ "${key}" == "OPENAI_API_BASE" || "${key}" == "OPENAI_BASE_URL" || "${key}" == "NEXT_PUBLIC_R2R_DEFAULT_PASSWORD" ]]; then
+      expected_optional=true
+    fi
+    [[ "${optional}" == "${expected_optional}" ]] || failures=$((failures + 1))
   done < <(jq -c --arg service "${service_name}" '.[$service] | to_entries[]' "${template_root}/template-defaults.json")
 done <<<"${expected_services}"
 
@@ -60,4 +66,3 @@ public_count="$(jq '[.data.template.serializedConfig.services[] | select(.networ
 
 (( failures == 0 )) || { echo "R2R template audit failed with ${failures} mismatch(es)." >&2; exit 1; }
 echo "Template ${template_id} matches the R2R source, pins, defaults, volume, and networking."
-

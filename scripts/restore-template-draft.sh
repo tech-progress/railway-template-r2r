@@ -32,7 +32,10 @@ variables="$(jq -nc --argjson draft "${draft}" --argjson graph "${graph}" \
     .services[$service.key].deploy.healthcheckPath = ($desired[$service.value.name].deploy.healthcheckPath // null) |
     .services[$service.key].deploy.healthcheckTimeout = ($desired[$service.value.name].deploy.healthcheckTimeout // null) |
     reduce (($defaults[0][$service.value.name] // {}) | to_entries[]) as $variable (.;
-      .services[$service.key].variables[$variable.key] = ((.services[$service.key].variables[$variable.key] // {}) + {defaultValue:$variable.value,isOptional:false}) |
+      .services[$service.key].variables[$variable.key] = ((.services[$service.key].variables[$variable.key] // {}) + {
+        defaultValue:$variable.value,
+        isOptional:($variable.key == "OPENAI_API_BASE" or $variable.key == "OPENAI_BASE_URL" or $variable.key == "NEXT_PUBLIC_R2R_DEFAULT_PASSWORD")
+      }) |
       .services[$service.key].variables[$variable.key].description = $descriptions[0][$service.value.name][$variable.key]
     ) |
     if $volumes[0][$service.value.name] != null then reduce (.services[$service.key].volumeMounts | keys[]) as $mount (.;
@@ -55,4 +58,3 @@ settings_request="$(jq -nc --arg id "${template_id}" --arg workspaceId "${worksp
 settings_response="$(curl --compressed --fail --silent --show-error https://backboard.railway.com/graphql/internal --header "Authorization: Bearer ${railway_access_token}" --header 'Content-Type: application/json' --data-binary "${settings_request}")"
 jq -e '.data.templateUpsertSettings.name == "R2R RAG backend" and ((.errors // []) | length == 0)' <<<"${settings_response}" >/dev/null
 echo "Restored R2R template ${template_id} source, pins, defaults, descriptions, volume, and networking."
-

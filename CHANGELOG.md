@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.2] - 2026-08-01
+
+- Mark the two optional provider-base variables and the browser-visible blank password as optional in the marketplace draft.
+- Correct the marketplace resource guidance and publishing category after the live Railway verification.
+
 ## [1.0.1] - 2026-08-01
 
 - Declare graph clustering's port 7276 explicitly so Railway can route its health check.
