@@ -1,6 +1,6 @@
 # R2R RAG backend on Railway
 
-This template deploys an authenticated R2R 3.6.5 API and dashboard with private pgvector/PostgreSQL storage and R2R's graph-clustering service. All runtime images are pinned by digest, PostgreSQL has no public endpoint, and the current template release is `v1.0.0`.
+This template deploys an authenticated R2R 3.6.5 API and dashboard with private pgvector/PostgreSQL storage and R2R's graph-clustering service. All runtime images are pinned by digest, PostgreSQL has no public endpoint, and the current template release is `v1.0.1`.
 
 [Deploy R2R RAG backend on Railway](https://railway.com/deploy/r2r-rag-backend)
 
@@ -23,4 +23,3 @@ Every required variable is created by the template. You provide only `OPENAI_API
 ## Operations
 
 Back up the PostgreSQL volume because it contains the complete durable R2R state for this topology. This is a single API replica with no database high availability, external object store, Hatchet workers, SMTP verification, or autoscaling. Read `UPGRADE.md` before changing any image or embedding dimension, and use `SUPPORT.md` for failure diagnosis.
-

@@ -5,7 +5,9 @@
     "POSTGRES_PASSWORD": "Generated PostgreSQL password shared with R2R through a service reference.",
     "PGDATA": "PostgreSQL data directory beneath the Railway volume mount."
   },
-  "R2R Graph Clustering": {},
+  "R2R Graph Clustering": {
+    "PORT": "Railway health-routing port for the private graph-clustering service."
+  },
   "R2R API": {
     "PORT": "Railway HTTP routing port for the R2R API.",
     "R2R_HOST": "Network interface on which R2R accepts requests.",
@@ -36,4 +38,3 @@
     "R2R_DASHBOARD_DISABLE_TELEMETRY": "Disables dashboard telemetry for this self-hosted deployment."
   }
 }
-

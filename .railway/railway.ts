@@ -39,6 +39,7 @@ export default defineRailway(() => {
     source: { image: CLUSTERING_IMAGE },
     healthcheck: "/health",
     healthcheckTimeout: 120,
+    env: { PORT: "7276" },
   });
 
   const r2r = service("R2R API", {
@@ -97,4 +98,3 @@ export default defineRailway(() => {
     ],
   });
 });
-

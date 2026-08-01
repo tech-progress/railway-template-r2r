@@ -5,7 +5,9 @@
     "POSTGRES_PASSWORD": "${{secret(32)}}",
     "PGDATA": "/var/lib/postgresql/data/pgdata"
   },
-  "R2R Graph Clustering": {},
+  "R2R Graph Clustering": {
+    "PORT": "7276"
+  },
   "R2R API": {
     "PORT": "7272",
     "R2R_HOST": "0.0.0.0",
@@ -36,4 +38,3 @@
     "R2R_DASHBOARD_DISABLE_TELEMETRY": "true"
   }
 }
-
