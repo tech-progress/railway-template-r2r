@@ -1,6 +1,6 @@
 # Publishing R2R RAG backend
 
-The current template release is `v1.0.2`. Publish the standalone repository's `release-v1` branch and immutable `v1.0.2` tag, then apply `.railway/railway.ts` to a source project.
+The current template release is `v1.0.3`. Publish the standalone repository's `release-v1` branch and immutable `v1.0.3` tag, then apply `.railway/railway.ts` to a source project.
 
 Generate public domains for `R2R API` on port 7272 and `R2R Dashboard` on port 3000. Supply a disposable OpenAI-compatible provider only for verification, run `scripts/smoke-client.py`, restart the API and PostgreSQL, rerun the smoke, and confirm every service has one running and zero crashed replicas.
 

@@ -4,7 +4,7 @@ set -euo pipefail
 template_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 required_files=(
   .dockerignore .env.example .gitignore .railway/railway.ts bun.lock CHANGELOG.md
-  compose.yaml Dockerfile entrypoint.py FINDINGS.md LICENSE_REVIEW.md MARKETPLACE.md
+  compose.yaml Dockerfile entrypoint.py LICENSE_REVIEW.md MARKETPLACE.md
   package.json PUBLISHING.md README.md r2r.toml.template sanitize-image.py SUPPORT.md
   template-defaults.json template-descriptions.json template-networking.json
   template-volumes.json UPGRADE.md VERSION scripts/audit-template.sh
@@ -82,4 +82,3 @@ if find "${template_root}" -type f \( -name .env -o -name '*.local' \) -print -q
   exit 1
 fi
 echo "R2R template structure, immutable images, auth, variables, volume, and networking are valid."
-

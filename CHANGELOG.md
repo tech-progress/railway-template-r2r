@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.3] - 2026-08-01
+
+- Make the verification script runnable from the public standalone repository, where private research findings are intentionally excluded.
+
 ## [1.0.2] - 2026-08-01
 
 - Mark the two optional provider-base variables and the browser-visible blank password as optional in the marketplace draft.
