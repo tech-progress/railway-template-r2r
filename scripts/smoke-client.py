@@ -76,4 +76,3 @@ if "citation" not in rag.text.lower() and "[1]" not in rag.text:
     raise SystemExit("RAG response did not include citation evidence")
 
 print("R2R authentication, ingestion, search, cited RAG, and persistence checks passed.")
-

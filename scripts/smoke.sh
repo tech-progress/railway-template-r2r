@@ -9,4 +9,3 @@ docker compose exec -T \
   -e R2R_ADMIN_EMAIL="${R2R_ADMIN_EMAIL:?R2R_ADMIN_EMAIL is required}" \
   -e R2R_ADMIN_PASSWORD="${R2R_ADMIN_PASSWORD:?R2R_ADMIN_PASSWORD is required}" \
   r2r python /app/railway-smoke-client.py
-

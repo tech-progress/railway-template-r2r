@@ -9,4 +9,3 @@ safe = 'logger.info("Initializing DatabaseProvider.")'
 if source.count(unsafe) != 1:
     raise SystemExit("unexpected R2R database logging source; refusing image build")
 path.write_text(source.replace(unsafe, safe), encoding="utf-8")
-

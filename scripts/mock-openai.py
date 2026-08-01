@@ -72,4 +72,3 @@ class Handler(BaseHTTPRequestHandler):
 
 
 ThreadingHTTPServer(("0.0.0.0", 8080), Handler).serve_forever()
-

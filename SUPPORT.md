@@ -7,4 +7,3 @@ An ingestion or RAG request returning a provider error usually means `OPENAI_API
 Changing `R2R_ADMIN_PASSWORD` after the database is initialized does not reset the existing administrator. Use R2R's password-management API or dashboard flow instead. Changing `POSTGRES_PASSWORD` after initialization also requires changing the PostgreSQL role itself before updating the matching variables.
 
 This template supports one R2R API replica using simple orchestration. Hatchet, MinIO, SMTP verification, high availability, provider-specific model changes, and embedding-dimension migrations are outside the support boundary.
-

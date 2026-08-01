@@ -15,4 +15,3 @@ if [[ -e "${standalone_dir}/FINDINGS.md" ]]; then
 fi
 diff -qr --exclude=.git --exclude=FINDINGS.md --exclude=node_modules --exclude=__pycache__ "${template_root}" "${standalone_dir}"
 echo "R2R monorepo and standalone distribution files match."
-
