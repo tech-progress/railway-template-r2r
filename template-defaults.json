@@ -1,0 +1,39 @@
+{
+  "R2R PostgreSQL": {
+    "POSTGRES_DB": "r2r",
+    "POSTGRES_USER": "r2r",
+    "POSTGRES_PASSWORD": "${{secret(32)}}",
+    "PGDATA": "/var/lib/postgresql/data/pgdata"
+  },
+  "R2R Graph Clustering": {},
+  "R2R API": {
+    "PORT": "7272",
+    "R2R_HOST": "0.0.0.0",
+    "R2R_PORT": "7272",
+    "R2R_LOG_LEVEL": "INFO",
+    "R2R_PROJECT_NAME": "railway_r2r",
+    "R2R_SECRET_KEY": "${{secret(64)}}",
+    "R2R_ADMIN_EMAIL": "admin@example.com",
+    "R2R_ADMIN_PASSWORD": "${{secret(32)}}",
+    "R2R_POSTGRES_HOST": "${{R2R PostgreSQL.RAILWAY_PRIVATE_DOMAIN}}",
+    "R2R_POSTGRES_PORT": "5432",
+    "R2R_POSTGRES_DBNAME": "${{R2R PostgreSQL.POSTGRES_DB}}",
+    "R2R_POSTGRES_USER": "${{R2R PostgreSQL.POSTGRES_USER}}",
+    "R2R_POSTGRES_PASSWORD": "${{R2R PostgreSQL.POSTGRES_PASSWORD}}",
+    "R2R_POSTGRES_MAX_CONNECTIONS": "64",
+    "R2R_POSTGRES_STATEMENT_CACHE_SIZE": "100",
+    "OPENAI_API_KEY": "",
+    "OPENAI_API_BASE": "",
+    "OPENAI_BASE_URL": "",
+    "CLUSTERING_SERVICE_URL": "http://${{R2R Graph Clustering.RAILWAY_PRIVATE_DOMAIN}}:7276",
+    "HATCHET_CLIENT_TLS_STRATEGY": "none"
+  },
+  "R2R Dashboard": {
+    "PORT": "3000",
+    "NEXT_PUBLIC_R2R_DEPLOYMENT_URL": "https://${{R2R API.RAILWAY_PUBLIC_DOMAIN}}",
+    "NEXT_PUBLIC_R2R_DEFAULT_EMAIL": "admin@example.com",
+    "NEXT_PUBLIC_R2R_DEFAULT_PASSWORD": "",
+    "R2R_DASHBOARD_DISABLE_TELEMETRY": "true"
+  }
+}
+

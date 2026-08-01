@@ -1,0 +1,39 @@
+{
+  "R2R PostgreSQL": {
+    "POSTGRES_DB": "Database used by R2R for documents, chunks, vectors, files, users, and metadata.",
+    "POSTGRES_USER": "PostgreSQL role used only by the private R2R service.",
+    "POSTGRES_PASSWORD": "Generated PostgreSQL password shared with R2R through a service reference.",
+    "PGDATA": "PostgreSQL data directory beneath the Railway volume mount."
+  },
+  "R2R Graph Clustering": {},
+  "R2R API": {
+    "PORT": "Railway HTTP routing port for the R2R API.",
+    "R2R_HOST": "Network interface on which R2R accepts requests.",
+    "R2R_PORT": "R2R API listening port.",
+    "R2R_LOG_LEVEL": "R2R application logging level.",
+    "R2R_PROJECT_NAME": "PostgreSQL schema namespace used by this R2R deployment.",
+    "R2R_SECRET_KEY": "Generated signing key for R2R authentication tokens.",
+    "R2R_ADMIN_EMAIL": "Initial administrator email used to sign in to the dashboard and API.",
+    "R2R_ADMIN_PASSWORD": "Generated initial administrator password; read it from this service after deployment.",
+    "R2R_POSTGRES_HOST": "Private Railway hostname of the PostgreSQL service.",
+    "R2R_POSTGRES_PORT": "Private PostgreSQL port.",
+    "R2R_POSTGRES_DBNAME": "Database name referenced from PostgreSQL.",
+    "R2R_POSTGRES_USER": "Database role referenced from PostgreSQL.",
+    "R2R_POSTGRES_PASSWORD": "Database password referenced from PostgreSQL and redacted from R2R startup logs.",
+    "R2R_POSTGRES_MAX_CONNECTIONS": "R2R database pool ceiling for this single-replica topology.",
+    "R2R_POSTGRES_STATEMENT_CACHE_SIZE": "Prepared-statement cache size per R2R database connection.",
+    "OPENAI_API_KEY": "Required OpenAI API key for embeddings, ingestion summaries, retrieval, and RAG answers.",
+    "OPENAI_API_BASE": "Optional OpenAI-compatible base URL used by LiteLLM embeddings; leave blank for OpenAI.",
+    "OPENAI_BASE_URL": "Optional OpenAI-compatible base URL used by the OpenAI completion client; keep aligned with OPENAI_API_BASE.",
+    "CLUSTERING_SERVICE_URL": "Private graph-clustering service endpoint.",
+    "HATCHET_CLIENT_TLS_STRATEGY": "Compatibility setting for R2R's simple local orchestration mode."
+  },
+  "R2R Dashboard": {
+    "PORT": "Railway HTTP routing port for the dashboard.",
+    "NEXT_PUBLIC_R2R_DEPLOYMENT_URL": "Public HTTPS URL of the R2R API used by browser clients.",
+    "NEXT_PUBLIC_R2R_DEFAULT_EMAIL": "Non-secret administrator email shown by the dashboard login form.",
+    "NEXT_PUBLIC_R2R_DEFAULT_PASSWORD": "Intentionally blank because NEXT_PUBLIC values are visible to every browser.",
+    "R2R_DASHBOARD_DISABLE_TELEMETRY": "Disables dashboard telemetry for this self-hosted deployment."
+  }
+}
+

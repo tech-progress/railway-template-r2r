@@ -1,0 +1,7 @@
+{
+  "R2R PostgreSQL": {
+    "mountPath": "/var/lib/postgresql/data",
+    "sizeMB": 5000
+  }
+}
+

@@ -1,0 +1,9 @@
+{
+  "name": "railway-r2r-rag-backend-template",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "railway": "3.6.0"
+  }
+}
+
