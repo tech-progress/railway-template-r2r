@@ -1,0 +1,9 @@
+{
+  "R2R API": {
+    "OPENAI_API_BASE": true,
+    "OPENAI_BASE_URL": true
+  },
+  "R2R Dashboard": {
+    "NEXT_PUBLIC_R2R_DEFAULT_PASSWORD": true
+  }
+}

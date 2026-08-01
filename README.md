@@ -1,6 +1,6 @@
 # R2R RAG backend on Railway
 
-This template deploys an authenticated R2R 3.6.5 API and dashboard with private pgvector/PostgreSQL storage and R2R's graph-clustering service. All runtime images are pinned by digest, PostgreSQL has no public endpoint, and the current template release is `v1.0.3`.
+This template deploys an authenticated R2R 3.6.5 API and dashboard with private pgvector/PostgreSQL storage and R2R's graph-clustering service. All runtime images are pinned by digest, PostgreSQL has no public endpoint, and the current template release is `v1.0.4`.
 
 [Deploy R2R RAG backend on Railway](https://railway.com/deploy/r2r-rag-backend)
 
@@ -18,7 +18,16 @@ The bundled configuration uses R2R's simple in-process orchestration, which is a
 
 ## Environment variables
 
-Every required variable is created by the template. You provide only `OPENAI_API_KEY`; the administrator and database credentials are generated. Optional provider-base variables must be changed together as described above. See `template-descriptions.json` for the complete service-by-service variable contract.
+Every required variable is created by the template, and you provide only `OPENAI_API_KEY`; the administrator and database credentials are generated. The complete service contract is:
+
+- PostgreSQL uses `POSTGRES_DB`, `POSTGRES_USER`, generated `POSTGRES_PASSWORD`, and `PGDATA` to initialize its private database and persistent data directory.
+- Graph clustering uses `PORT=7276` so Railway can route private health checks to the service.
+- The API uses `PORT`, `R2R_HOST`, and `R2R_PORT` for HTTP routing; `R2R_LOG_LEVEL` for logging; and `R2R_PROJECT_NAME` as its PostgreSQL schema namespace.
+- The API uses generated `R2R_SECRET_KEY` and `R2R_ADMIN_PASSWORD` values plus `R2R_ADMIN_EMAIL` to secure tokens and create the initial administrator.
+- The API receives `R2R_POSTGRES_HOST`, `R2R_POSTGRES_PORT`, `R2R_POSTGRES_DBNAME`, `R2R_POSTGRES_USER`, and `R2R_POSTGRES_PASSWORD` through private service references, while `R2R_POSTGRES_MAX_CONNECTIONS` and `R2R_POSTGRES_STATEMENT_CACHE_SIZE` tune its connection pool.
+- The API requires `OPENAI_API_KEY`; optional `OPENAI_API_BASE` and `OPENAI_BASE_URL` values must be changed together when using a compatible provider.
+- The API uses `CLUSTERING_SERVICE_URL` to reach graph clustering privately and `HATCHET_CLIENT_TLS_STRATEGY=none` for the bundled simple orchestration mode.
+- The dashboard uses `PORT`, the referenced `NEXT_PUBLIC_R2R_DEPLOYMENT_URL`, and `NEXT_PUBLIC_R2R_DEFAULT_EMAIL`; `NEXT_PUBLIC_R2R_DEFAULT_PASSWORD` stays blank to avoid exposing the administrator secret, and `R2R_DASHBOARD_DISABLE_TELEMETRY=true` disables telemetry.
 
 ## Operations
 

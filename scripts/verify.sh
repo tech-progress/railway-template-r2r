@@ -7,7 +7,7 @@ required_files=(
   compose.yaml Dockerfile entrypoint.py LICENSE_REVIEW.md MARKETPLACE.md
   package.json PUBLISHING.md README.md r2r.toml.template sanitize-image.py SUPPORT.md
   template-defaults.json template-descriptions.json template-networking.json
-  template-volumes.json UPGRADE.md VERSION scripts/audit-template.sh
+  template-optionality.json template-volumes.json UPGRADE.md VERSION scripts/audit-template.sh
   scripts/check-standalone.sh scripts/mock-openai.py scripts/restore-template-draft.sh
   scripts/smoke-client.py scripts/smoke.sh scripts/verify.sh
 )
@@ -32,7 +32,7 @@ R2R_ADMIN_EMAIL=admin@example.com R2R_ADMIN_PASSWORD=verify-password \
 OPENAI_API_KEY=verify-key OPENAI_API_BASE= \
   docker compose -f "${template_root}/compose.yaml" config --quiet
 
-for file in template-defaults.json template-descriptions.json template-networking.json template-volumes.json; do
+for file in template-defaults.json template-descriptions.json template-networking.json template-optionality.json template-volumes.json; do
   jq empty "${template_root}/${file}"
 done
 for file in "${template_root}"/scripts/*.sh; do bash -n "${file}"; done
@@ -64,6 +64,11 @@ jq -e --slurpfile descriptions "${template_root}/template-descriptions.json" '
   to_entries | all(. as $service |
     (.value | keys | sort) == ($descriptions[0][$service.key] | keys | sort))
 ' "${template_root}/template-defaults.json" >/dev/null
+
+jq -e --slurpfile defaults "${template_root}/template-defaults.json" '
+  to_entries | all(. as $service |
+    (.value | keys - ($defaults[0][$service.key] | keys) | length) == 0)
+' "${template_root}/template-optionality.json" >/dev/null
 
 for pin in \
   e7caf41aba36db5561a2579eeb3e4763c907ae4d4b241712a33e783fa381aa8a \

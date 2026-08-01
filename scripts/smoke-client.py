@@ -28,19 +28,26 @@ headers = {"Authorization": f"Bearer {token}"}
 documents = requests.get(f"{base_url}/v3/documents", headers=headers, timeout=30)
 documents.raise_for_status()
 existing = documents.json().get("results", [])
-if not any("ORCHID-742" in str(document) for document in existing):
+if not any("railway-upload-verification.txt" in str(document) for document in existing):
     created = requests.post(
         f"{base_url}/v3/documents",
         headers=headers,
+        files={
+            "file": (
+                "railway-upload-verification.txt",
+                b"Railway template persisted file upload code ORCHID-742.",
+                "text/plain",
+            )
+        },
         data={
-            "raw_text": "Railway template persistence verification code ORCHID-742.",
             "ingestion_mode": "fast",
             "run_with_orchestration": "false",
-            "metadata": '{"title":"Railway persistence verification ORCHID-742"}',
+            "metadata": '{"title":"Railway file upload verification"}',
         },
         timeout=180,
     )
-    created.raise_for_status()
+    if created.status_code != 409:
+        created.raise_for_status()
 
 search_payload = {
     "query": "What is the Railway template verification code?",
@@ -75,4 +82,4 @@ if "ORCHID-742" not in rag.text:
 if "citation" not in rag.text.lower() and "[1]" not in rag.text:
     raise SystemExit("RAG response did not include citation evidence")
 
-print("R2R authentication, ingestion, search, cited RAG, and persistence checks passed.")
+print("R2R authentication, file upload, ingestion, search, cited RAG, and persistence checks passed.")

@@ -23,5 +23,5 @@ The deployment uses R2R 3.6.5, R2R Dashboard 1.0.3, pgvector/PostgreSQL 16, R2R'
 
 ### Deployment Dependencies
 
-- An OpenAI API key with access to `text-embedding-3-small` and `gpt-4.1-mini`.
-- A Railway plan with enough memory for roughly 900 MB of settled service usage plus workload headroom.
+- Provide an OpenAI API key with access to `text-embedding-3-small` and `gpt-4.1-mini` so ingestion and cited generation can complete.
+- Use a Railway plan with enough memory for roughly 900 MB of settled service usage plus workload headroom, or the four-service topology may exceed its limits.

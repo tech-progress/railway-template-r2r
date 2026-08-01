@@ -44,10 +44,7 @@ while IFS= read -r service_name; do
     expected_description="$(jq -r --arg service "${service_name}" --arg key "${key}" '.[$service][$key]' "${template_root}/template-descriptions.json")"
     [[ "${description}" == "${expected_description}" ]] || failures=$((failures + 1))
     optional="$(jq -r --arg key "${key}" '.variables[$key].isOptional // false' <<<"${actual}")"
-    expected_optional=false
-    if [[ "${key}" == "OPENAI_API_BASE" || "${key}" == "OPENAI_BASE_URL" || "${key}" == "NEXT_PUBLIC_R2R_DEFAULT_PASSWORD" ]]; then
-      expected_optional=true
-    fi
+    expected_optional="$(jq -r --arg service "${service_name}" --arg key "${key}" '.[$service][$key] // false' "${template_root}/template-optionality.json")"
     [[ "${optional}" == "${expected_optional}" ]] || failures=$((failures + 1))
   done < <(jq -c --arg service "${service_name}" '.[$service] | to_entries[]' "${template_root}/template-defaults.json")
 done <<<"${expected_services}"

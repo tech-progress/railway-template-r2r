@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.4] - 2026-08-01
+
+- Document the complete generated environment contract in the public README.
+- Centralize marketplace variable optionality so draft restoration and auditing cannot drift.
+- Exercise the multipart file-upload path in the release smoke test.
+
 ## [1.0.3] - 2026-08-01
 
 - Make the verification script runnable from the public standalone repository, where private research findings are intentionally excluded.

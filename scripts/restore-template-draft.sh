@@ -12,6 +12,7 @@ draft="$(railway api 'query Draft($id: String!) { template(id: $id) { serialized
 variables="$(jq -nc --argjson draft "${draft}" --argjson graph "${graph}" \
   --slurpfile defaults "${template_root}/template-defaults.json" \
   --slurpfile descriptions "${template_root}/template-descriptions.json" \
+  --slurpfile optionality "${template_root}/template-optionality.json" \
   --slurpfile volumes "${template_root}/template-volumes.json" \
   --slurpfile networking "${template_root}/template-networking.json" \
   --arg id "${template_id}" --arg workspaceId "${workspace_id}" '
@@ -34,7 +35,7 @@ variables="$(jq -nc --argjson draft "${draft}" --argjson graph "${graph}" \
     reduce (($defaults[0][$service.value.name] // {}) | to_entries[]) as $variable (.;
       .services[$service.key].variables[$variable.key] = ((.services[$service.key].variables[$variable.key] // {}) + {
         defaultValue:$variable.value,
-        isOptional:($variable.key == "OPENAI_API_BASE" or $variable.key == "OPENAI_BASE_URL" or $variable.key == "NEXT_PUBLIC_R2R_DEFAULT_PASSWORD")
+        isOptional:($optionality[0][$service.value.name][$variable.key] // false)
       }) |
       .services[$service.key].variables[$variable.key].description = $descriptions[0][$service.value.name][$variable.key]
     ) |
