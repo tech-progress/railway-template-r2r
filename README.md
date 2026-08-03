@@ -2,6 +2,8 @@
 
 This template deploys an authenticated R2R 3.6.5 API and dashboard with private pgvector/PostgreSQL storage and R2R's graph-clustering service. All runtime images are pinned by digest, PostgreSQL has no public endpoint, and the current template release is `v1.0.4`.
 
+Upstream project: [R2R](https://github.com/SciPhi-AI/R2R).
+
 [Deploy R2R RAG backend on Railway](https://railway.com/deploy/r2r-rag-backend)
 
 ## Required configuration
